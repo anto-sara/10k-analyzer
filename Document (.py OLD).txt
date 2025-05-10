@@ -1,0 +1,99 @@
+from fastapi import APIRouter, UploadFile, File, HTTPException, Depends, BackgroundTasks
+from typing import Dict, Any, List
+import os
+import uuid
+import shutil
+from datetime import datetime
+from ...models.ml_manager import MLManager
+from ..schemas.models import (
+    DocumentResponse, SearchQuery, SearchResponse, 
+    AnalysisRequest, AnalysisResponse
+)
+from typing import Dict, Any, List
+
+router = APIRouter()
+ml_manager = MLManager()
+
+@router.post("/upload/", response_model=DocumentResponse)
+async def upload_document(
+    background_tasks: BackgroundTasks,
+    file: UploadFile = File(...)
+):
+    # Create a temp directory if it doesn't exist
+    os.makedirs("temp", exist_ok=True)
+    
+    # Generate a unique filename
+    file_extension = os.path.splitext(file.filename)[1]
+    temp_file_path = f"temp/{str(uuid.uuid4())}{file_extension}"
+    
+    # Save the uploaded file
+    with open(temp_file_path, "wb") as buffer:
+        shutil.copyfileobj(file.file, buffer)
+    
+    # Process the document
+    result = ml_manager.process_document(temp_file_path)
+    
+    # Clean up the temp file
+    background_tasks.add_task(os.remove, temp_file_path)
+    
+    if result.get("status") != "success":
+        raise HTTPException(status_code=400, detail=result.get("message", "Failed to process document"))
+    
+    # Convert the result to the expected response format
+    return {
+        "id": result["document_id"],
+        "title": result["title"],
+        "content": "Content stored successfully",  # Not returning full content to reduce response size
+        "file_type": os.path.splitext(file.filename)[1],
+        "upload_time": datetime.now()
+    }
+
+@router.post("/search/", response_model=SearchResponse)
+async def search_documents(query: SearchQuery):
+    results = ml_manager.search_similar_documents(query.query, limit=query.limit)
+    
+    # Format results for the response
+    formatted_results = []
+    for result in results:
+        formatted_results.append({
+            "chunk_text": result["chunk_text"],
+            "document_id": result["document_id"],
+            "document_title": result["title"],
+            "distance": float(result["distance"])
+        })
+    
+    return {"results": formatted_results}
+
+@router.post("/analyze/", response_model=AnalysisResponse)
+async def analyze_document(request: AnalysisRequest):
+    if request.document_id is None and request.text is None:
+        raise HTTPException(status_code=400, detail="Either document_id or text must be provided")
+    
+    if request.text:
+        # Analyze provided text
+        analysis_result = ml_manager.analyze_text(request.text)
+        return analysis_result
+    else:
+        # TODO: Implement retrieval of document by ID for analysis
+        # For now, return an error
+        raise HTTPException(status_code=501, detail="Analysis by document ID not yet implemented")
+
+@router.get("/financial-summary/{document_id}", response_model=Dict[str, Any])
+async def get_financial_summary(document_id: int):
+    """Get financial summary for a document."""
+    result = ml_manager.get_financial_summary(document_id)
+    
+    if result.get("status") != "success":
+        raise HTTPException(status_code=404, detail=result.get("message", "Financial summary not found"))
+    
+    return result
+
+@router.get("/tldr-summary/{document_id}", response_model=Dict[str, Any])
+async def get_tldr_summary(document_id: int):
+    """Get TLDR summary for a document."""
+    result = ml_manager.get_financial_summary(document_id)
+    
+    if result.get("status") != "success":
+        raise HTTPException(status_code=404, detail=result.get("message", "TLDR summary not found"))
+    
+    return {"summary": result.get("summary", {})}

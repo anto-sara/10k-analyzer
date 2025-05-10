@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1200" height="800" fill="#f8f9fa" />
+  
+  <!-- Title -->
+  <text x="600" y="40" font-family="Arial" font-size="24" text-anchor="middle" font-weight="bold">Document Analysis System Architecture</text>
+  
+  <!-- Presentation Layer -->
+  <rect x="50" y="80" width="1100" height="120" rx="10" fill="#d1ecf1" stroke="#0c5460" stroke-width="2" />
+  <text x="600" y="105" font-family="Arial" font-size="18" text-anchor="middle" font-weight="bold" fill="#0c5460">Presentation Layer</text>
+  
+  <!-- Frontend Components -->
+  <rect x="80" y="120" width="180" height="60" rx="5" fill="white" stroke="#0c5460" stroke-width="1" />
+  <text x="170" y="155" font-family="Arial" font-size="14" text-anchor="middle">Dashboard</text>
+  
+  <rect x="280" y="120" width="180" height="60" rx="5" fill="white" stroke="#0c5460" stroke-width="1" />
+  <text x="370" y="155" font-family="Arial" font-size="14" text-anchor="middle">Document Viewer</text>
+  
+  <rect x="480" y="120" width="180" height="60" rx="5" fill="white" stroke="#0c5460" stroke-width="1" />
+  <text x="570" y="155" font-family="Arial" font-size="14" text-anchor="middle">Financial Report UI</text>
+  
+  <rect x="680" y="120" width="180" height="60" rx="5" fill="white" stroke="#0c5460" stroke-width="1" />
+  <text x="770" y="155" font-family="Arial" font-size="14" text-anchor="middle">Analysis Results</text>
+  
+  <rect x="880" y="120" width="180" height="60" rx="5" fill="#e6f7ff" stroke="#0c5460" stroke-width="1" />
+  <text x="970" y="146" font-family="Arial" font-size="14" text-anchor="middle">NEW: Progress</text>
+  <text x="970" y="164" font-family="Arial" font-size="14" text-anchor="middle">Tracking UI</text>
+  
+  <!-- Application Layer -->
+  <rect x="50" y="220" width="1100" height="160" rx="10" fill="#d4edda" stroke="#155724" stroke-width="2" />
+  <text x="600" y="245" font-family="Arial" font-size="18" text-anchor="middle" font-weight="bold" fill="#155724">Application Layer</text>
+  
+  <!-- API Controllers -->
+  <rect x="70" y="260" width="260" height="100" rx="5" fill="white" stroke="#155724" stroke-width="1" />
+  <text x="200" y="280" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">API Controllers</text>
+  <line x1="70" y1="290" x2="330" y2="290" stroke="#155724" stroke-width="1" />
+  <text x="100" y="310" font-family="Arial" font-size="12">- Document Controller</text>
+  <text x="100" y="330" font-family="Arial" font-size="12">- Analysis Controller</text>
+  <text x="100" y="350" font-family="Arial" font-size="12">- Search Controller</text>
+  
+  <!-- Services -->
+  <rect x="350" y="260" width="260" height="100" rx="5" fill="white" stroke="#155724" stroke-width="1" />
+  <text x="480" y="280" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">Services</text>
+  <line x1="350" y1="290" x2="610" y2="290" stroke="#155724" stroke-width="1" />
+  <text x="380" y="310" font-family="Arial" font-size="12">- Document Service</text>
+  <text x="380" y="330" font-family="Arial" font-size="12">- Analysis Service</text>
+  <text x="380" y="350" font-family="Arial" font-size="12">- Background Processing Service</text>
+  
+  <!-- New Components -->
+  <rect x="630" y="260" width="260" height="100" rx="5" fill="#e6f7ff" stroke="#155724" stroke-width="1" />
+  <text x="760" y="280" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">NEW: Enhanced Services</text>
+  <line x1="630" y1="290" x2="890" y2="290" stroke="#155724" stroke-width="1" />
+  <text x="660" y="310" font-family="Arial" font-size="12">- Analysis History Service</text>
+  <text x="660" y="330" font-family="Arial" font-size="12">- Enhanced TLDR Generator</text>
+  <text x="660" y="350" font-family="Arial" font-size="12">- Sankey Diagram Generator</text>
+  
+  <!-- Event System -->
+  <rect x="910" y="260" width="220" height="100" rx="5" fill="#e6f7ff" stroke="#155724" stroke-width="1" />
+  <text x="1020" y="280" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">NEW: Event System</text>
+  <line x1="910" y1="290" x2="1130" y2="290" stroke="#155724" stroke-width="1" />
+  <text x="940" y="310" font-family="Arial" font-size="12">- Progress Tracking</text>
+  <text x="940" y="330" font-family="Arial" font-size="12">- Webhooks</text>
+  <text x="940" y="350" font-family="Arial" font-size="12">- Real-time Updates</text>
+  
+  <!-- Data Processing Layer -->
+  <rect x="50" y="400" width="1100" height="160" rx="10" fill="#fff3cd" stroke="#856404" stroke-width="2" />
+  <text x="600" y="425" font-family="Arial" font-size="18" text-anchor="middle" font-weight="bold" fill="#856404">Data Processing Layer</text>
+  
+  <!-- Document Processing -->
+  <rect x="70" y="440" width="200" height="100" rx="5" fill="white" stroke="#856404" stroke-width="1" />
+  <text x="170" y="460" font-family="Arial" font-size="14" text-anchor="middle" font-weight="bold">Document Processing</text>
+  <line x1="70" y1="470" x2="270" y2="470" stroke="#856404" stroke-width="1" />
+  <text x="90" y="490" font-family="Arial" font-size="12">- Document Processor</text>
+  <text x="90" y="510" font-family="Arial" font-size="12">- SEC Filing Processor</text>
+  <text x="90" y="530" font-family="Arial" font-size="12">- Table Extractor</text>
+  
+  <!-- ML Processing -->
+  <rect x="290" y="440" width="200" height="100" rx="5" fill="white" stroke="#856404" stroke-width="1" />
+  <text x="390" y="460" font-family="Arial" font-size="14" text-anchor="middle" font-weight="bold">ML Processing</text>
+  <line x1="290" y1="470" x2="490" y2="470" stroke="#856404" stroke-width="1" />
+  <text x="310" y="490" font-family="Arial" font-size="12">- Embedding Generator</text>
+  <text x="310" y="510" font-family="Arial" font-size="12">- Document Analyzer</text>
+  <text x="310" y="530" font-family="Arial" font-size="12">- Report Summarizer</text>
+  
+  <!-- Financial Processing -->
+  <rect x="510" y="440" width="200" height="100" rx="5" fill="white" stroke="#856404" stroke-width="1" />
+  <text x="610" y="460" font-family="Arial" font-size="14" text-anchor="middle" font-weight="bold">Financial Processing</text>
+  <line x1="510" y1="470" x2="710" y2="470" stroke="#856404" stroke-width="1" />
+  <text x="530" y="490" font-family="Arial" font-size="12">- Financial Statement Parser</text>
+  <text x="530" y="510" font-family="Arial" font-size="12">- Income Statement Analyzer</text>
+  <text x="530" y="530" font-family="Arial" font-size="12">- Cash Flow Analyzer</text>
+  
+  <!-- Enhanced ML & Viz -->
+  <rect x="730" y="440" width="200" height="100" rx="5" fill="#e6f7ff" stroke="#856404" stroke-width="1" />
+  <text x="830" y="460" font-family="Arial" font-size="14" text-anchor="middle" font-weight="bold">NEW: Enhanced ML</text>
+  <line x1="730" y1="470" x2="930" y2="470" stroke="#856404" stroke-width="1" />
+  <text x="750" y="490" font-family="Arial" font-size="12">- Deep TLDR Generator</text>
+  <text x="750" y="510" font-family="Arial" font-size="12">- Long-form Summarizer</text>
+  <text x="750" y="530" font-family="Arial" font-size="12">- Trend Detection</text>
+  
+  <!-- Visualization Factory -->
+  <rect x="950" y="440" width="200" height="100" rx="5" fill="#e6f7ff" stroke="#856404" stroke-width="1" />
+  <text x="1050" y="460" font-family="Arial" font-size="14" text-anchor="middle" font-weight="bold">NEW: Visualization</text>
+  <line x1="950" y1="470" x2="1150" y2="470" stroke="#856404" stroke-width="1" />
+  <text x="970" y="490" font-family="Arial" font-size="12">- Sankey Diagram Generator</text>
+  <text x="970" y="510" font-family="Arial" font-size="12">- Enhanced Reports</text>
+  <text x="970" y="530" font-family="Arial" font-size="12">- Financial Flow Charts</text>
+  
+  <!-- Data Storage Layer -->
+  <rect x="50" y="580" width="1100" height="120" rx="10" fill="#f8d7da" stroke="#721c24" stroke-width="2" />
+  <text x="600" y="605" font-family="Arial" font-size="18" text-anchor="middle" font-weight="bold" fill="#721c24">Data Storage Layer</text>
+  
+  <!-- PostgreSQL Database -->
+  <rect x="70" y="620" width="260" height="60" rx="5" fill="white" stroke="#721c24" stroke-width="1" />
+  <text x="200" y="655" font-family="Arial" font-size="14" text-anchor="middle">PostgreSQL + pgvector</text>
+  
+  <!-- Document Storage -->
+  <rect x="350" y="620" width="260" height="60" rx="5" fill="white" stroke="#721c24" stroke-width="1" />
+  <text x="480" y="655" font-family="Arial" font-size="14" text-anchor="middle">File Storage System</text>
+  
+  <!-- Cache -->
+  <rect x="630" y="620" width="260" height="60" rx="5" fill="#e6f7ff" stroke="#721c24" stroke-width="1" />
+  <text x="760" y="655" font-family="Arial" font-size="14" text-anchor="middle">NEW: Redis Cache</text>
+  
+  <!-- Analysis History Storage -->
+  <rect x="910" y="620" width="240" height="60" rx="5" fill="#e6f7ff" stroke="#721c24" stroke-width="1" />
+  <text x="1030" y="655" font-family="Arial" font-size="14" text-anchor="middle">NEW: Analysis History Store</text>
+  
+  <!-- Infrastructure Layer -->
+  <rect x="50" y="720" width="1100" height="60" rx="10" fill="#e2e3e5" stroke="#383d41" stroke-width="2" />
+  <text x="600" y="745" font-family="Arial" font-size="18" text-anchor="middle" font-weight="bold" fill="#383d41">Infrastructure Layer (Docker, APIs, Hosting)</text>
+  
+  <!-- Arrows -->
+  <!-- Presentation to Application -->
+  <line x1="600" y1="200" x2="600" y2="220" stroke="#333" stroke-width="2" stroke-dasharray="5,5" />
+  <polygon points="600,220 595,210 605,210" fill="#333" />
+  
+  <!-- Application to Data Processing -->
+  <line x1="600" y1="380" x2="600" y2="400" stroke="#333" stroke-width="2" stroke-dasharray="5,5" />
+  <polygon points="600,400 595,390 605,390" fill="#333" />
+  
+  <!-- Data Processing to Data Storage -->
+  <line x1="600" y1="560" x2="600" y2="580" stroke="#333" stroke-width="2" stroke-dasharray="5,5" />
+  <polygon points="600,580 595,570 605,570" fill="#333" />
+  
+  <!-- Data Storage to Infrastructure -->
+  <line x1="600" y1="700" x2="600" y2="720" stroke="#333" stroke-width="2" stroke-dasharray="5,5" />
+  <polygon points="600,720 595,710 605,710" fill="#333" />
+  
+  <!-- Legend -->
+  <rect x="950" y="30" width="20" height="10" fill="white" stroke="#333" stroke-width="1" />
+  <text x="980" y="40" font-family="Arial" font-size="12">Existing Components</text>
+  
+  <rect x="950" y="50" width="20" height="10" fill="#e6f7ff" stroke="#333" stroke-width="1" />
+  <text x="980" y="60" font-family="Arial" font-size="12">New/Enhanced Components</text>
+</svg>

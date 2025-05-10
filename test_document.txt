@@ -1,0 +1,14 @@
+
+            # Document Analysis Test
+            
+            This is a test document for the API endpoint. 
+            It contains some sample text that will be processed by the document analysis system.
+            
+            The system should:
+            1. Extract the content
+            2. Split it into chunks
+            3. Generate embeddings
+            4. Store everything in the database
+            
+            Let's see if it works!
+            

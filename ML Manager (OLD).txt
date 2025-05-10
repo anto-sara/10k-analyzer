@@ -1,0 +1,109 @@
+ML Manager (OLD)
+from .processing.document_processor import DocumentProcessor
+from .processing.sec_document_processor import SECFilingProcessor
+from .embedding.embedding_generator import EmbeddingGenerator
+from .analysis.document_analyzer import DocumentAnalyzer
+from ..utils.pgvector_db import PgVectorDB
+from typing import Dict, Any, List, Optional
+import json
+import time
+
+class MLManager:
+    def __init__(self):
+        self.document_processor = DocumentProcessor()
+        self.sec_processor = SECFilingProcessor()
+        self.embedding_generator = EmbeddingGenerator()
+        self.document_analyzer = DocumentAnalyzer()
+        self.db = PgVectorDB(
+            host='localhost',
+            port='5433',  # Using our Docker PostgreSQL port
+            dbname='my_project_db',
+            user='postgres',
+            password='Ishinehere1'
+        )
+    
+    def process_document(self, file_path: str) -> Dict[str, Any]:
+        """Process an SEC filing and extract structured data"""
+        # Step 1: Load the document
+        doc_info = self.sec_processor.load_from_file(file_path)
+        
+        if doc_info.get('status') == 'error':
+            return doc_info
+        
+        # Step 2: Store the document in the database
+        document_id = self.db.store_document(
+            title=doc_info['title'],
+            content=doc_info['content'],
+            file_type=doc_info['file_type']
+        )
+        
+        if not document_id:
+            return {'status': 'error', 'message': 'Failed to store document in database'}
+        
+        doc_info['id'] = document_id
+        
+        # Step 3: Split the document into chunks
+        chunks = self.document_processor.split_document(doc_info['content'])
+        
+        # Step 4: Store each chunk and its embedding
+        for chunk in chunks:
+            # Store the chunk
+            chunk_id = self.db.store_document_chunk(
+                document_id=document_id,
+                chunk_text=chunk['chunk_text'],
+                chunk_index=chunk['chunk_index']
+            )
+            
+            if not chunk_id:
+                continue
+            
+            # Generate embedding for the chunk
+            embedding = self.embedding_generator.generate_embedding(chunk['chunk_text'])
+            
+            # Store the embedding
+            self.db.store_embedding(chunk_id=chunk_id, embedding=embedding)
+        
+        # Step 5: Analyze the document
+        analysis_result = self.document_analyzer.analyze_document(doc_info)
+        
+        # Step 6: Store the analysis results
+        if analysis_result:
+            self.db.store_analysis_result(
+                document_id=document_id,
+                analysis_type='comprehensive',
+                analysis_result=json.dumps(analysis_result)
+            )
+        
+        return {
+            'status': 'success',
+            'document_id': document_id,
+            'title': doc_info['title'],
+            'chunks_processed': len(chunks),
+            'analysis': analysis_result
+        }
+    
+    def search_similar_documents(self, query_text: str, limit: int = 5) -> List[Dict[str, Any]]:
+        """Search for documents similar to the query text."""
+        # Generate embedding for the query
+        query_embedding = self.embedding_generator.generate_embedding(query_text)
+        
+        # Search for similar chunks
+        similar_chunks = self.db.search_similar_chunks(
+            query_embedding=query_embedding,
+            limit=limit
+        )
+        
+        return similar_chunks
+    
+    def analyze_text(self, text: str) -> Dict[str, Any]:
+        """Analyze a text without storing it in the database."""
+        return self.document_analyzer.analyze_document({'content': text})
+    
+    def answer_question(self, document_id: int, question: str) -> Dict[str, Any]:
+        """Answer a question about a specific document."""
+        # TODO: Implement retrieval of document by ID
+        # For now, we'll return a placeholder
+        return {
+            'status': 'error',
+            'message': 'Not implemented yet'
+        }
